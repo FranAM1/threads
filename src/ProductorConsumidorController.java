@@ -9,6 +9,18 @@ public class ProductorConsumidorController {
 
     private ProductorConsumidorView view;
 
+    private int numeroProdcutores;
+
+    private int numeroConsumidores;
+
+    private int tiempoConsumir;
+
+    private int tiempoProducir;
+
+    private boolean tiempoConsumirAleatorio;
+
+    private boolean tiempoProducirAleatorio;
+
     private Contador contador;
 
     Contador contadorPI;
@@ -35,6 +47,15 @@ public class ProductorConsumidorController {
 
         this.model = new ProductorConsumidorModel(this);
         this.view = new ProductorConsumidorView(this);
+
+        this.numeroProdcutores = Integer.parseInt(this.view.getNumeroProductores().getText());
+        this.tiempoProducir = this.view.getSliderProductorAleatorio().getValue();
+        this.tiempoProducirAleatorio = true;
+
+        this.numeroConsumidores = Integer.parseInt(this.view.getNumeroConsumidores().getText());
+        this.tiempoConsumir = this.view.getSliderProductorAleatorio().getValue();
+        this.tiempoConsumirAleatorio = true;
+
     }
 
     public static void main(String[] args){
@@ -52,6 +73,21 @@ public class ProductorConsumidorController {
         this.contadorCA.setValor(0);
         this.setPrimero(LocalTime.now());
         this.setUltimo(LocalTime.now());
+
+        this.numeroProdcutores = Integer.parseInt(this.view.getNumeroProductores().getText());
+        this.numeroConsumidores = Integer.parseInt(this.view.getNumeroConsumidores().getText());
+
+        this.tiempoConsumirAleatorio = this.view.getCheckBoxConsumidorAleatorio().isSelected();
+        this.tiempoProducirAleatorio = this.view.getCheckBoxProductorAleatorio().isSelected();
+
+
+        this.tiempoConsumir = tiempoConsumirAleatorio ?
+                this.view.getSliderConsumidorAleatorio().getValue() :
+                Integer.parseInt(this.view.getConsumidorTiempoFijo().getText());
+
+        this.tiempoProducir = tiempoProducirAleatorio ?
+                this.view.getSliderProductorAleatorio().getValue() :
+                Integer.parseInt(this.view.getProductorTiempoFijo().getText());
 
         this.model.play();
     }
@@ -134,5 +170,53 @@ public class ProductorConsumidorController {
 
     public void setSleepValue(int sleepValue) {
         this.sleepValue = sleepValue;
+    }
+
+    public int getNumeroProdcutores() {
+        return numeroProdcutores;
+    }
+
+    public void setNumeroProdcutores(int numeroProdcutores) {
+        this.numeroProdcutores = numeroProdcutores;
+    }
+
+    public int getNumeroConsumidores() {
+        return numeroConsumidores;
+    }
+
+    public void setNumeroConsumidores(int numeroConsumidores) {
+        this.numeroConsumidores = numeroConsumidores;
+    }
+
+    public int getTiempoConsumir() {
+        return tiempoConsumir;
+    }
+
+    public void setTiempoConsumir(int tiempoConsumir) {
+        this.tiempoConsumir = tiempoConsumir;
+    }
+
+    public int getTiempoProducir() {
+        return tiempoProducir;
+    }
+
+    public void setTiempoProducir(int tiempoProducir) {
+        this.tiempoProducir = tiempoProducir;
+    }
+
+    public boolean getTiempoConsumirAleatorio() {
+        return tiempoConsumirAleatorio;
+    }
+
+    public void setTiempoConsumirAleatorio(boolean tiempoConsumirAleatorio) {
+        this.tiempoConsumirAleatorio = tiempoConsumirAleatorio;
+    }
+
+    public boolean getTiempoProducirAleatorio() {
+        return tiempoProducirAleatorio;
+    }
+
+    public void setTiempoProducirAleatorio(boolean tiempoProducirAleatorio) {
+        this.tiempoProducirAleatorio = tiempoProducirAleatorio;
     }
 }

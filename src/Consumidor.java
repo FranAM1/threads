@@ -20,8 +20,15 @@ public class Consumidor implements Runnable{
 
             this.model.getController().getContador().desc();
             try {
-                Random rand = new Random();
-                int sleepTime = rand.nextInt(100);
+                int sleepTime = 0;
+                if (this.model.getController().getTiempoConsumirAleatorio()){
+                    Random rand = new Random();
+
+                    sleepTime = rand.nextInt(this.model.getController().getTiempoConsumir() == 0? 1 : this.model.getController().getTiempoConsumir());
+                }else{
+                    sleepTime = this.model.getController().getTiempoConsumir();
+                }
+
                 Thread.sleep(sleepTime);
             } catch (InterruptedException e) {
                 e.printStackTrace();

@@ -11,14 +11,14 @@ public class ProductorConsumidorModel{
     public void play(){
         ArrayList<Thread> threads = new ArrayList<>();
 
-        for (int i = 0; i < 200; i++){
+        for (int i = 0; i < this.getController().getNumeroProdcutores(); i++){
             Productor productor = new Productor(this);
             Thread hilo = new Thread(productor);
             hilo.start();
             threads.add(hilo);
         }
 
-        for (int i = 0; i < 400; i++){
+        for (int i = 0; i < this.getController().getNumeroConsumidores(); i++){
             Consumidor consumidor = new Consumidor(this);
             Thread hilo = new Thread(consumidor);
             hilo.start();

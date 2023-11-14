@@ -20,8 +20,14 @@ public class Productor implements Runnable{
         for (int i = 0; i < 100; i++){
             this.model.getController().getContador().inc();
             try {
-                Random rand = new Random();
-                int sleepTime = rand.nextInt(100);
+                int sleepTime = 0;
+                if (this.model.getController().getTiempoProducirAleatorio()){
+                    Random rand = new Random();
+                    sleepTime = rand.nextInt(this.model.getController().getTiempoProducir() == 0 ? 1 : this.model.getController().getTiempoProducir());
+                }else{
+                    sleepTime = this.model.getController().getTiempoProducir();
+                }
+
                 Thread.sleep(sleepTime);
             } catch (InterruptedException e) {
                 e.printStackTrace();
