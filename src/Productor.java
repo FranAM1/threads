@@ -1,18 +1,16 @@
-import java.time.Clock;
-import java.time.LocalTime;
 import java.util.Random;
 
 public class Productor implements Runnable{
 
-    ProductorConsumidorModel model;
+    TJTLModel model;
 
-    public Productor(ProductorConsumidorModel model) {
+    public Productor(TJTLModel model) {
         this.model = model;
     }
 
     public void run() {
-        if (this.model.getController().getPrimero().isAfter(LocalTime.now())){
-            this.model.getController().setPrimero(LocalTime.now());
+        if (this.model.getController().getPrimero() > System.currentTimeMillis()){
+            this.model.getController().setPrimero(System.currentTimeMillis());
         }
 
 
@@ -21,7 +19,7 @@ public class Productor implements Runnable{
             this.model.getController().getContador().inc();
             try {
                 int sleepTime = 0;
-                if (this.model.getController().getTiempoProducirAleatorio()){
+                if (this.model.getController().isTiempoProducirAleatorio()){
                     Random rand = new Random();
                     sleepTime = rand.nextInt(this.model.getController().getTiempoProducir() == 0 ? 1 : this.model.getController().getTiempoProducir());
                 }else{
@@ -37,8 +35,8 @@ public class Productor implements Runnable{
         this.model.getController().getContadorPI().desc();
         this.model.getController().getContadorPA().inc();
 
-        if (this.model.getController().getUltimo().isBefore(LocalTime.now())){
-            this.model.getController().setUltimo(LocalTime.now());
+        if (this.model.getController().getUltimo() < System.currentTimeMillis()){
+            this.model.getController().setUltimo(System.currentTimeMillis());
         }
     }
 }

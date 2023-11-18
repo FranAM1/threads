@@ -1,12 +1,10 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.time.format.DateTimeFormatter;
-import java.util.Random;
 
-public class ProductorConsumidorView extends JFrame implements ComponentListener, ActionListener, ItemListener, Runnable {
-    private JButton startButton;
+public class TJTLVista extends JFrame implements ComponentListener, ActionListener, ItemListener, Runnable {
+
+    private ControlPanel controlPanel;
 
     private JLabel titleLabel;
 
@@ -20,13 +18,19 @@ public class ProductorConsumidorView extends JFrame implements ComponentListener
 
     private JTextField productoresAcabados;
 
-    private JTextField horaInicio;
-
-    private JTextField horaFin;
+    private JTextField totalTiempo;
 
     private JTextField numeroProductores;
 
     private JTextField numeroConsumidores;
+
+    private JTextField totalCreacionThread;
+
+    private JTextField mediaCreacionThread;
+
+    private JTextField totalRealizarStart;
+
+    private JTextField mediaRealizarStart;
 
     private JSlider sliderProductorAleatorio;
 
@@ -40,21 +44,14 @@ public class ProductorConsumidorView extends JFrame implements ComponentListener
 
     private JCheckBox checkBoxConsumidorAleatorio;
 
-    private ProductorConsumidorController controller;
-
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private TJTLController controller;
 
 
-    public ProductorConsumidorView(ProductorConsumidorController controller) {
+    public TJTLVista(TJTLController controller) {
         this.controller = controller;
 
         this.titleLabel = new JLabel("ThreadLab");
         this.titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-
-
-
-        this.startButton = new JButton("Play");
-        this.startButton.addActionListener(this);
 
         this.textField = new JTextField("0");
         this.textField.setBackground(Color.RED);
@@ -66,8 +63,14 @@ public class ProductorConsumidorView extends JFrame implements ComponentListener
         this.consumidoresAcabados = new JTextField("0");
         this.productoresIniciados = new JTextField("0");
         this.productoresAcabados = new JTextField("0");
-        this.horaInicio = new JTextField("0");
-        this.horaFin = new JTextField("0");
+
+        this.totalTiempo = new JTextField("0");
+
+        this.totalCreacionThread = new JTextField("0");
+        this.mediaCreacionThread = new JTextField("0");
+
+        this.totalRealizarStart = new JTextField("0");
+        this.mediaRealizarStart = new JTextField("0");
 
         this.numeroProductores = new JTextField("200");
         this.numeroConsumidores = new JTextField("400");
@@ -111,9 +114,7 @@ public class ProductorConsumidorView extends JFrame implements ComponentListener
 
         JLabel labelPA = new JLabel("Productores acabados");
 
-        JLabel horaInicio = new JLabel("Inicio: ");
-
-        JLabel horaFinal = new JLabel("Fin: ");
+        JLabel tiempoTotal = new JLabel("Tiempo total: ");
 
         JLabel consumidorAleatorioLabel = new JLabel("Tiempo producir aleatorio: ");
 
@@ -132,7 +133,7 @@ public class ProductorConsumidorView extends JFrame implements ComponentListener
         panel.add(this.titleLabel, c);
         c.gridy = 1;
         c.fill = GridBagConstraints.NONE;
-        panel.add(this.startButton, c);
+        panel.add(this.controlPanel, c);
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
@@ -177,18 +178,41 @@ public class ProductorConsumidorView extends JFrame implements ComponentListener
         c.gridy = 7;
         c.gridheight = 1;
         c.gridwidth = 1;
-        panel.add(horaInicio, c);
+        panel.add(tiempoTotal, c);
         c.gridx = 1;
-        panel.add(this.horaInicio, c);
+        panel.add(this.totalTiempo, c);
 
         c.gridx = 0;
         c.gridy = 8;
         c.gridheight = 1;
         c.gridwidth = 1;
-        panel.add(horaFinal, c);
+        panel.add(new JLabel("Tiempo creacion objetos Thread"), c);
+        c.gridy = 9;
+        panel.add(new JLabel("Total: "), c);
         c.gridx = 1;
-        panel.add(this.horaFin, c);
+        panel.add(this.totalCreacionThread,c);
+        c.gridy = 10;
+        c.gridx = 0;
+        panel.add(new JLabel("Medio: "), c);
+        c.gridx = 1;
+        panel.add(this.mediaCreacionThread,c);
 
+        c.gridx = 0;
+        c.gridy = 11;
+        c.gridheight = 1;
+        c.gridwidth = 1;
+        panel.add(new JLabel("Tiempo de realizar start()"), c);
+        c.gridy = 12;
+        panel.add(new JLabel("Total: "), c);
+        c.gridx = 1;
+        panel.add(this.totalRealizarStart,c);
+        c.gridy = 13;
+        c.gridx = 0;
+        panel.add(new JLabel("Medio: "), c);
+        c.gridx = 1;
+        panel.add(this.mediaRealizarStart,c);
+
+        // COLUMNAS DE 3+
         c.gridx = 3;
         c.gridy = 3;
         c.gridheight = 1;
@@ -253,8 +277,7 @@ public class ProductorConsumidorView extends JFrame implements ComponentListener
                 this.consumidoresAcabados.setText(String.valueOf(controller.getContadorCA().getValor()));
                 this.productoresIniciados.setText(String.valueOf(controller.getContadorPI().getValor()));
                 this.productoresAcabados.setText(String.valueOf(controller.getContadorPA().getValor()));
-                this.horaInicio.setText(controller.getPrimero().format(formatter));
-                this.horaFin.setText(controller.getUltimo().format(formatter));
+                this.totalTiempo.setText((controller.getUltimo() - controller.getPrimero()) + " ms");
             }catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -267,14 +290,13 @@ public class ProductorConsumidorView extends JFrame implements ComponentListener
     public void actionPerformed(ActionEvent e) {
         String str = e.getActionCommand();
         switch (str) {
-            case "Play":
+            case "Play/Pause":
                 this.getTextField().setText("0");
                 this.consumidoresIniciados.setText("0");
                 this.consumidoresAcabados.setText("0");
                 this.productoresIniciados.setText("0");
                 this.productoresAcabados.setText("0");
-                this.horaInicio.setText("0");
-                this.horaFin.setText("0");
+                this.totalTiempo.setText("0");
                 controller.play();
                 break;
             default:
@@ -330,11 +352,11 @@ public class ProductorConsumidorView extends JFrame implements ComponentListener
         this.textField = textField;
     }
 
-    public ProductorConsumidorController getController() {
+    public TJTLController getController() {
         return controller;
     }
 
-    public void setController(ProductorConsumidorController controller) {
+    public void setController(TJTLController controller) {
         this.controller = controller;
     }
 
@@ -378,20 +400,44 @@ public class ProductorConsumidorView extends JFrame implements ComponentListener
         this.productoresAcabados = productoresAcabados;
     }
 
-    public JTextField getHoraInicio() {
-        return horaInicio;
+    public JTextField getTotalTiempo() {
+        return totalTiempo;
     }
 
-    public void setHoraInicio(JTextField horaInicio) {
-        this.horaInicio = horaInicio;
+    public void setTotalTiempo(JTextField totalTiempo) {
+        this.totalTiempo = totalTiempo;
     }
 
-    public JTextField getHoraFin() {
-        return horaFin;
+    public JTextField getTotalCreacionThread() {
+        return totalCreacionThread;
     }
 
-    public void setHoraFin(JTextField horaFin) {
-        this.horaFin = horaFin;
+    public void setTotalCreacionThread(JTextField totalCreacionThread) {
+        this.totalCreacionThread = totalCreacionThread;
+    }
+
+    public JTextField getMediaCreacionThread() {
+        return mediaCreacionThread;
+    }
+
+    public void setMediaCreacionThread(JTextField mediaCreacionThread) {
+        this.mediaCreacionThread = mediaCreacionThread;
+    }
+
+    public JTextField getTotalRealizarStart() {
+        return totalRealizarStart;
+    }
+
+    public void setTotalRealizarStart(JTextField totalRealizarStart) {
+        this.totalRealizarStart = totalRealizarStart;
+    }
+
+    public JTextField getMediaRealizarStart() {
+        return mediaRealizarStart;
+    }
+
+    public void setMediaRealizarStart(JTextField mediaRealizarStart) {
+        this.mediaRealizarStart = mediaRealizarStart;
     }
 
     public JTextField getNumeroProductores() {
@@ -456,13 +502,5 @@ public class ProductorConsumidorView extends JFrame implements ComponentListener
 
     public void setCheckBoxConsumidorAleatorio(JCheckBox checkBoxConsumidorAleatorio) {
         this.checkBoxConsumidorAleatorio = checkBoxConsumidorAleatorio;
-    }
-
-    public static DateTimeFormatter getFormatter() {
-        return formatter;
-    }
-
-    public static void setFormatter(DateTimeFormatter formatter) {
-        ProductorConsumidorView.formatter = formatter;
     }
 }
