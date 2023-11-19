@@ -31,8 +31,9 @@ public class ResultsViewer extends JPanel implements Runnable{
         this.tablaMilisegundos = new JTable(modelMilisegundos);
         this.centerValue(this.tablaMilisegundos);
         this.configureColumnWidth(this.tablaMilisegundos);
-        this.tablaMilisegundos.setIntercellSpacing(new Dimension(10,10));
-        this.tablaMilisegundos.setRowHeight(25);
+        this.configureHeader(this.tablaMilisegundos);
+        this.configurePadding(this.tablaMilisegundos);
+
 
         // CONFIGURACION SCROLLPANE MILISEGUNDOS
         this.scrollPaneMilisegundos = new JScrollPane(this.tablaMilisegundos);
@@ -55,8 +56,9 @@ public class ResultsViewer extends JPanel implements Runnable{
         this.tablaCantidad = new JTable(modelCantidad);
         this.centerValue(this.tablaCantidad);
         this.configureColumnWidth(this.tablaCantidad);
-        this.tablaCantidad.setIntercellSpacing(new Dimension(10,10));
-        this.tablaCantidad.setRowHeight(25);
+        this.configureHeader(this.tablaCantidad);
+        this.configurePadding(this.tablaCantidad);
+
 
 
         // CONFIGURACION SCROLLPANE CANTIDAD
@@ -93,6 +95,17 @@ public class ResultsViewer extends JPanel implements Runnable{
 
         c.gridy++;
         this.add(this.scrollPaneCantidad, c);
+    }
+
+    private void configureHeader(JTable table){
+        table.getTableHeader().setBackground(Color.darkGray);
+        table.getTableHeader().setForeground(Color.white);
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 13));
+    }
+
+    private void configurePadding(JTable table){
+        table.setIntercellSpacing(new Dimension(10,10));
+        table.setRowHeight(25);
     }
 
     public void run() {

@@ -17,7 +17,8 @@ public class TJTLVista extends JFrame implements ComponentListener, ActionListen
 
     public TJTLVista(TJTLController controller) {
         titleLabel = new JLabel("ThreadLab 🔬");
-        titleLabel.setFont(new Font("Sherif", Font.BOLD, 36));
+        //because of the font
+        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 36));
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
 
