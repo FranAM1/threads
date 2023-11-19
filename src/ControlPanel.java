@@ -16,6 +16,8 @@ public class ControlPanel extends JPanel{
     public ControlPanel(ActionListener al){
         this.setLayout(new GridBagLayout());
 
+        this.configureJPanel();
+
         this.playPauseButton = new JToggleButton("Play/Pause");
         this.playPauseButton.addActionListener(al);
 
@@ -26,34 +28,46 @@ public class ControlPanel extends JPanel{
         this.applyButton.addActionListener(al);
 
         this.protectCriticalRegions = new JCheckBox("Protect Critical Regions");
+        this.protectCriticalRegions.setBackground(Color.darkGray);
+        this.protectCriticalRegions.setForeground(Color.WHITE);
 
         this.preventNegativeStocks = new JCheckBox("Prevent Negative Stocks");
+        this.preventNegativeStocks.setBackground(Color.darkGray);
+        this.preventNegativeStocks.setForeground(Color.WHITE);
 
-
+        addContentToPane();
     }
 
-    private void addContentToPanel(){
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        this.add(this.playPauseButton, gbc);
+    private void addContentToPane(){
+        GridBagConstraints c = new GridBagConstraints();
+        c.anchor = GridBagConstraints.CENTER;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(5, 5, 5, 5);
+        c.weightx = 1;
+        c.weighty = 1;
+        c.gridwidth = 1;
+        c.gridheight = 1;
+        c.gridx = 0;
+        c.gridy = 0;
 
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        this.add(this.resetButton, gbc);
+        this.add(this.playPauseButton, c);
 
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        this.add(this.applyButton, gbc);
+        c.gridx++;
+        this.add(this.resetButton, c);
 
-        gbc.gridx = 3;
-        gbc.gridy = 0;
-        this.add(this.protectCriticalRegions, gbc);
+        c.gridx++;
+        this.add(this.applyButton, c);
 
-        gbc.gridx = 4;
-        gbc.gridy = 0;
-        this.add(this.preventNegativeStocks, gbc);
+        c.gridx++;
+        this.add(this.protectCriticalRegions, c);
+
+        c.gridx++;
+        this.add(this.preventNegativeStocks, c);
+    }
+
+    private void configureJPanel(){
+        this.setBackground(Color.RED);
+        this.setBackground(Color.darkGray);
     }
 
 
