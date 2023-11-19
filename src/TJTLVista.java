@@ -16,8 +16,8 @@ public class TJTLVista extends JFrame implements ComponentListener, ActionListen
 
 
     public TJTLVista(TJTLController controller) {
-        titleLabel = new JLabel("ThreadLab");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
+        titleLabel = new JLabel("ThreadLab 🔬");
+        titleLabel.setFont(new Font("Sherif", Font.BOLD, 36));
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
 
@@ -61,6 +61,7 @@ public class TJTLVista extends JFrame implements ComponentListener, ActionListen
         this.setLayout(new GridBagLayout());
         this.getContentPane().setBackground(Color.DARK_GRAY);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
         this.addComponentsToPane(this.getContentPane());
     }
 

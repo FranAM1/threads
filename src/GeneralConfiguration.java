@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -28,6 +29,7 @@ public class GeneralConfiguration extends JPanel {
     public GeneralConfiguration(){
         this.setLayout(new GridBagLayout());
         this.setPreferredSize(new Dimension(400, 500));
+        this.setMinimumSize(new Dimension(400, 500));
 
         this.setBackground(Color.darkGray);
 

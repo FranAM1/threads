@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
 public class ResultsViewer extends JPanel implements Runnable{
@@ -22,16 +23,20 @@ public class ResultsViewer extends JPanel implements Runnable{
                 {"Procesar los hilos consumidores", 0},
                 {"Procesar los hilos productores", 0},
         };
-        String[] columnMilisegundos = {"Descripción", "Milisegundos"};
+        String[] columnMilisegundos = {"Acción", "Milisegundos"};
 
         DefaultTableModel modelMilisegundos = new DefaultTableModel(dataMilisegundos, columnMilisegundos);
 
+        //CONFIGURACION JTABLE MILISEGUNDOS
         this.tablaMilisegundos = new JTable(modelMilisegundos);
         this.centerValue(this.tablaMilisegundos);
         this.configureColumnWidth(this.tablaMilisegundos);
+        this.tablaMilisegundos.setIntercellSpacing(new Dimension(10,10));
+        this.tablaMilisegundos.setRowHeight(25);
 
+        // CONFIGURACION SCROLLPANE MILISEGUNDOS
         this.scrollPaneMilisegundos = new JScrollPane(this.tablaMilisegundos);
-        this.scrollPaneMilisegundos.setPreferredSize(new Dimension(300, 90));
+        this.scrollPaneMilisegundos.setPreferredSize(new Dimension(400, 123));
 
 
         Object[][] dataCantidad = {
@@ -42,16 +47,21 @@ public class ResultsViewer extends JPanel implements Runnable{
                 {"Hilos consumidores procesando", 0},
                 {"Hilos consumidores finalizados", 0},
         };
-        String[] columnCantidad = {"Descripción", "Cantidad"};
+        String[] columnCantidad = {"Acción", "Cantidad"};
 
         DefaultTableModel modelCantidad = new DefaultTableModel(dataCantidad, columnCantidad);
 
+        //CONFIGURACION JTABLE CANTIDAD
         this.tablaCantidad = new JTable(modelCantidad);
         this.centerValue(this.tablaCantidad);
         this.configureColumnWidth(this.tablaCantidad);
+        this.tablaCantidad.setIntercellSpacing(new Dimension(10,10));
+        this.tablaCantidad.setRowHeight(25);
 
+
+        // CONFIGURACION SCROLLPANE CANTIDAD
         this.scrollPaneCantidad = new JScrollPane(this.tablaCantidad);
-        this.scrollPaneCantidad.setPreferredSize(new Dimension(300, 120));
+        this.scrollPaneCantidad.setPreferredSize(new Dimension(400, 173));
 
 
         this.addComponentsToPane();
