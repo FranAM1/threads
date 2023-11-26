@@ -74,10 +74,16 @@ public class TJTLVista extends JFrame implements ComponentListener, ActionListen
         String str = e.getActionCommand();
         switch (str) {
             case "Play/Pause":
+                if (this.controlPanel.getPlayPauseButton().isSelected()){
+                    this.controller.play();
+                } else {
+                    this.controller.pause();
+                }
                 break;
             case "Reset":
                 this.controller.resetConfig();
                 this.generalConfiguration.updatePanelInfo();
+                this.resultsViewer.updateTableInfo();
                 break;
             default:
                 System.err.println("Acción NO tratada: " + e);
@@ -114,5 +120,45 @@ public class TJTLVista extends JFrame implements ComponentListener, ActionListen
         if (estado == ItemEvent.SELECTED) {
         } else {
         }
+    }
+
+    public ControlPanel getControlPanel() {
+        return controlPanel;
+    }
+
+    public void setControlPanel(ControlPanel controlPanel) {
+        this.controlPanel = controlPanel;
+    }
+
+    public GeneralConfiguration getGeneralConfiguration() {
+        return generalConfiguration;
+    }
+
+    public void setGeneralConfiguration(GeneralConfiguration generalConfiguration) {
+        this.generalConfiguration = generalConfiguration;
+    }
+
+    public ResultsViewer getResultsViewer() {
+        return resultsViewer;
+    }
+
+    public void setResultsViewer(ResultsViewer resultsViewer) {
+        this.resultsViewer = resultsViewer;
+    }
+
+    public TJTLController getController() {
+        return controller;
+    }
+
+    public void setController(TJTLController controller) {
+        this.controller = controller;
+    }
+
+    public JLabel getTitleLabel() {
+        return titleLabel;
+    }
+
+    public void setTitleLabel(JLabel titleLabel) {
+        this.titleLabel = titleLabel;
     }
 }

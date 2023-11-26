@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Consumer implements Runnable {
     private int consumedQuantity;
 
@@ -8,17 +10,23 @@ public class Consumer implements Runnable {
     }
 
     public void run() {
+        if (LabParameters.PROTECCION_RC) {
+            LabResults.CANTIDAD_HILOS_CONSUMIDORES_INI.inc_syncronized();
+        } else {
+            LabResults.CANTIDAD_HILOS_CONSUMIDORES_INI.inc();
+        }
+
         for (int i = 0; i < 100; i++){
-
             if(LabParameters.PROTECCION_RC) {
-
+                LabResults.CANTIDAD_ITEMS_CONSUMIDOS.inc_syncronized();
             } else {
-
+                LabResults.CANTIDAD_ITEMS_CONSUMIDOS.inc();
             }
 
             if(LabParameters.TIEMPO_ALEATORIO_CONSUMIDORES) {
                 try {
-                    Thread.sleep(LabParameters.VALOR_TIEMPO_ALEATORIO_CONSUMIDORES);
+                    Random random = new Random();
+                    Thread.sleep(random.nextInt(LabParameters.VALOR_TIEMPO_ALEATORIO_CONSUMIDORES));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -29,14 +37,16 @@ public class Consumer implements Runnable {
                     e.printStackTrace();
                 }
             }
-
-            if(LabParameters.PROTECCION_RC) {
-
-            } else {
-
-            }
-
         }
+
+        if (LabParameters.PROTECCION_RC) {
+            LabResults.CANTIDAD_HILOS_CONSUMIDORES_FIN.inc_syncronized();
+            LabResults.CANTIDAD_HILOS_CONSUMIDORES_INI.dec_syncronized();
+        } else {
+            LabResults.CANTIDAD_HILOS_CONSUMIDORES_FIN.inc();
+            LabResults.CANTIDAD_HILOS_CONSUMIDORES_INI.dec();
+        }
+
     }
 
     public int getConsumedQuantity() {

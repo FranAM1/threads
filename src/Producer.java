@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Producer implements Runnable{
     private int producedQuantity;
 
@@ -8,17 +10,23 @@ public class Producer implements Runnable{
     }
 
     public void run() {
-        for (int i = 0; i < LabParameters.NUM_ITEMS_PRODUCTORES; i++){
+        if (LabParameters.PROTECCION_RC){
+            LabResults.CANTIDAD_HILOS_PRODUCTORES_INI.inc_syncronized();
+        }else{
+            LabResults.CANTIDAD_HILOS_PRODUCTORES_INI.inc();
+        }
 
+        for (int i = 0; i < LabParameters.NUM_ITEMS_PRODUCTORES; i++){
             if (LabParameters.PROTECCION_RC){
-                LabParameters.PRODUCT.inc_syncronized();
+                LabResults.CANTIDAD_ITEMS_PRODUCIDOS.inc_syncronized();
             }else{
-                LabParameters.PRODUCT.inc();
+                LabResults.CANTIDAD_ITEMS_PRODUCIDOS.inc();
             }
 
             if (LabParameters.TIEMPO_ALEATORIO_PRODUCTORES){
                 try {
-                    Thread.sleep(LabParameters.VALOR_TIEMPO_ALEATORIO_PRODUCTORES);
+                    Random random = new Random();
+                    Thread.sleep(random.nextInt(LabParameters.VALOR_TIEMPO_ALEATORIO_PRODUCTORES));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -29,12 +37,14 @@ public class Producer implements Runnable{
                     e.printStackTrace();
                 }
             }
+        }
 
-            if (LabParameters.PROTECCION_RC){
-                LabParameters.PRODUCT.dec_syncronized();
-            }else{
-                LabParameters.PRODUCT.dec();
-            }
+        if (LabParameters.PROTECCION_RC){
+            LabResults.CANTIDAD_HILOS_PRODUCTORES_FIN.inc_syncronized();
+            LabResults.CANTIDAD_HILOS_PRODUCTORES_INI.dec_syncronized();
+        }else{
+            LabResults.CANTIDAD_HILOS_PRODUCTORES_FIN.inc();
+            LabResults.CANTIDAD_HILOS_PRODUCTORES_INI.dec();
         }
     }
 

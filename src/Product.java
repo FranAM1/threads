@@ -3,18 +3,18 @@ public class Product extends ProtectedCounter{
     private int producedQuantity;
     private int consumedQuantity;
 
-    public Product(String description, int producedQuantity, int consumedQuantity) {
+    public Product(String description) {
         this.description = description;
-        this.producedQuantity = producedQuantity;
-        this.consumedQuantity = consumedQuantity;
+        this.producedQuantity = 0;
+        this.consumedQuantity = 0;
     }
 
     public void produce(){
-
+        producedQuantity++;
     }
 
     public void consume(){
-
+        consumedQuantity++;
     }
 
     public int getStock(){

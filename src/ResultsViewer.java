@@ -69,6 +69,20 @@ public class ResultsViewer extends JPanel implements Runnable{
         this.addComponentsToPane();
     }
 
+    public void updateTableInfo(){
+        this.tablaMilisegundos.setValueAt(LabResults.MS_CREAR_THREADS, 0, 1);
+        this.tablaMilisegundos.setValueAt(LabResults.MS_INICIALIZAR_THREADS, 1, 1);
+        this.tablaMilisegundos.setValueAt(LabResults.MS_INICIALIZAR_THREADS_PRODUCTORES, 2, 1);
+        this.tablaMilisegundos.setValueAt(LabResults.MS_INICIALIZAR_THREADS_CONSUMIDORES, 3, 1);
+
+        this.tablaCantidad.setValueAt(LabResults.CANTIDAD_ITEMS_PRODUCIDOS.getValue(), 0, 1);
+        this.tablaCantidad.setValueAt(LabResults.CANTIDAD_ITEMS_CONSUMIDOS.getValue(), 1, 1);
+        this.tablaCantidad.setValueAt(LabResults.CANTIDAD_HILOS_PRODUCTORES_INI.getValue(), 2, 1);
+        this.tablaCantidad.setValueAt(LabResults.CANTIDAD_HILOS_PRODUCTORES_FIN.getValue(), 3, 1);
+        this.tablaCantidad.setValueAt(LabResults.CANTIDAD_HILOS_CONSUMIDORES_INI.getValue(), 4, 1);
+        this.tablaCantidad.setValueAt(LabResults.CANTIDAD_HILOS_CONSUMIDORES_FIN.getValue(), 5, 1);
+    }
+
     private void addComponentsToPane(){
         GridBagConstraints c = new GridBagConstraints();
 
@@ -109,7 +123,14 @@ public class ResultsViewer extends JPanel implements Runnable{
     }
 
     public void run() {
-        System.out.println("hola");
+        while (true){
+            this.updateTableInfo();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void configureColumnWidth(JTable table){

@@ -10,13 +10,23 @@ public class TJTLController {
 
     public static void main(String args[]) {
         TJTLController controller = new TJTLController();
+
+
     }
 
     public void play(){
         modelo.play();
+
+        Thread thread = new Thread(this.vista.getResultsViewer());
+        thread.start();
+    }
+
+    public void pause(){
+        modelo.pause();
     }
 
     public void resetConfig(){
-        modelo.resetConfig();
+        modelo.resetConfigParameters();
+        modelo.resetConfigResults();
     }
 }
