@@ -33,7 +33,7 @@ public class TJTLModel {
     }
 
     public void resetConfigParameters(){
-        LabParameters.PROTECCION_RC = true;
+        LabParameters.PROTECCION_RC = false;
         LabParameters.PREVENIR_STOCK_NEGATIVO = false;
 
         LabParameters.NUM_PRODUCTORES = 400;

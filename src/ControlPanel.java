@@ -28,14 +28,26 @@ public class ControlPanel extends JPanel{
         this.applyButton.addActionListener(al);
 
         this.protectCriticalRegions = new JCheckBox("Protect Critical Regions");
+        this.protectCriticalRegions.setSelected(LabParameters.PROTECCION_RC);
         this.protectCriticalRegions.setBackground(Color.darkGray);
         this.protectCriticalRegions.setForeground(Color.WHITE);
 
         this.preventNegativeStocks = new JCheckBox("Prevent Negative Stocks");
+        this.preventNegativeStocks.setSelected(LabParameters.PREVENIR_STOCK_NEGATIVO);
         this.preventNegativeStocks.setBackground(Color.darkGray);
         this.preventNegativeStocks.setForeground(Color.WHITE);
 
         addContentToPane();
+    }
+
+    public void updatePanel(){
+        this.protectCriticalRegions.setSelected(LabParameters.PROTECCION_RC);
+        this.preventNegativeStocks.setSelected(LabParameters.PREVENIR_STOCK_NEGATIVO);
+    }
+
+    public void updateDTO(){
+        LabParameters.PROTECCION_RC = this.protectCriticalRegions.isSelected();
+        LabParameters.PREVENIR_STOCK_NEGATIVO = this.preventNegativeStocks.isSelected();
     }
 
     private void addContentToPane(){

@@ -84,10 +84,21 @@ public class TJTLVista extends JFrame implements ComponentListener, ActionListen
                 this.controller.resetConfig();
                 this.generalConfiguration.updatePanelInfo();
                 this.resultsViewer.updateTableInfo();
+                this.controlPanel.updatePanel();
+                break;
+            case "Apply":
+                this.generalConfiguration.updateDTO();
+                this.controlPanel.updateDTO();
+
+                this.showApplyMessage();
                 break;
             default:
                 System.err.println("Acción NO tratada: " + e);
         }
+    }
+
+    private void showApplyMessage() {
+        JOptionPane.showMessageDialog(this, "Se han aplicado los cambios", "Cambios aplicados", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override

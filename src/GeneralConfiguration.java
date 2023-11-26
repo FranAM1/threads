@@ -84,6 +84,20 @@ public class GeneralConfiguration extends JPanel {
         this.consumoAleatorio.setSelected(LabParameters.TIEMPO_ALEATORIO_CONSUMIDORES);
     }
 
+    public void updateDTO(){
+        LabParameters.NUM_PRODUCTORES = Integer.parseInt(this.numProductores.getText());
+        LabParameters.NUM_ITEMS_PRODUCTORES = Integer.parseInt(this.numItemsProductores.getText());
+        LabParameters.VALOR_TIEMPO_ALEATORIO_PRODUCTORES = this.tiempoProduccionAleatorio.getValue();
+        LabParameters.VALOR_FIJO_TIEMPO_PRODUCTORES = Integer.parseInt(this.tiempoProduccionFijo.getText());
+        LabParameters.TIEMPO_ALEATORIO_PRODUCTORES = this.produccionAleatoria.isSelected();
+
+        LabParameters.NUM_CONSUMIDORES = Integer.parseInt(this.numConsumidores.getText());
+        LabParameters.NUM_ITEMS_CONSUMIDORES = Integer.parseInt(this.numItemsConsumidores.getText());
+        LabParameters.VALOR_TIEMPO_ALEATORIO_CONSUMIDORES = this.tiempoConsumoAleatorio.getValue();
+        LabParameters.VALOR_FIJO_TIEMPO_CONSUMIDORES = Integer.parseInt(this.tiempoConsumoFijo.getText());
+        LabParameters.TIEMPO_ALEATORIO_CONSUMIDORES = this.consumoAleatorio.isSelected();
+    }
+
     private void addContentToPane(){
         GridBagConstraints c = new GridBagConstraints();
 
