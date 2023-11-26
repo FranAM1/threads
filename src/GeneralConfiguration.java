@@ -33,37 +33,55 @@ public class GeneralConfiguration extends JPanel {
 
         this.setBackground(Color.darkGray);
 
-        this.numProductores = new JTextField("0");
 
-        this.numItemsProductores = new JTextField("0");
+        //PRODUCTORES
+        this.numProductores = new JTextField(LabParameters.NUM_PRODUCTORES+"");
 
-        this.tiempoProduccionAleatorio = new JSlider(0, 1000, 100);
+        this.numItemsProductores = new JTextField(LabParameters.NUM_ITEMS_PRODUCTORES+"");
+
+        this.tiempoProduccionAleatorio = new JSlider(0, 1000, LabParameters.VALOR_TIEMPO_ALEATORIO_PRODUCTORES);
         this.tiempoProduccionAleatorio.setPaintTicks(true);
         this.tiempoProduccionAleatorio.setPaintLabels(true);
         this.tiempoProduccionAleatorio.setMajorTickSpacing(250);
         this.tiempoProduccionAleatorio.setMinorTickSpacing(100);
 
-        this.tiempoProduccionFijo = new JTextField("0");
+        this.tiempoProduccionFijo = new JTextField(LabParameters.VALOR_FIJO_TIEMPO_PRODUCTORES+"");
 
         this.produccionAleatoria = new JCheckBox("Hacer tiempo de produccion aleatorio");
-        this.produccionAleatoria.setSelected(true);
+        this.produccionAleatoria.setSelected(LabParameters.TIEMPO_ALEATORIO_PRODUCTORES);
 
-        this.numConsumidores = new JTextField("0");
 
-        this.numItemsConsumidores = new JTextField("0");
+        // CONSUMIDORES
+        this.numConsumidores = new JTextField(LabParameters.NUM_CONSUMIDORES+"");
 
-        this.tiempoConsumoAleatorio = new JSlider(0, 1000, 100);
+        this.numItemsConsumidores = new JTextField(LabParameters.NUM_ITEMS_CONSUMIDORES+"");
+
+        this.tiempoConsumoAleatorio = new JSlider(0, 1000, LabParameters.VALOR_TIEMPO_ALEATORIO_CONSUMIDORES);
         this.tiempoConsumoAleatorio.setPaintTicks(true);
         this.tiempoConsumoAleatorio.setPaintLabels(true);
         this.tiempoConsumoAleatorio.setMajorTickSpacing(250);
         this.tiempoConsumoAleatorio.setMinorTickSpacing(100);
 
-        this.tiempoConsumoFijo = new JTextField("0");
+        this.tiempoConsumoFijo = new JTextField(LabParameters.VALOR_FIJO_TIEMPO_CONSUMIDORES+"");
 
         this.consumoAleatorio = new JCheckBox("Hacer tiempo de consumo aleatorio");
-        this.consumoAleatorio.setSelected(true);
+        this.consumoAleatorio.setSelected(LabParameters.TIEMPO_ALEATORIO_CONSUMIDORES);
 
         this.addContentToPane();
+    }
+
+    public void updatePanelInfo(){
+        this.numProductores.setText(LabParameters.NUM_PRODUCTORES+"");
+        this.numItemsProductores.setText(LabParameters.NUM_ITEMS_PRODUCTORES+"");
+        this.tiempoProduccionAleatorio.setValue(LabParameters.VALOR_TIEMPO_ALEATORIO_PRODUCTORES);
+        this.tiempoProduccionFijo.setText(LabParameters.VALOR_FIJO_TIEMPO_PRODUCTORES+"");
+        this.produccionAleatoria.setSelected(LabParameters.TIEMPO_ALEATORIO_PRODUCTORES);
+
+        this.numConsumidores.setText(LabParameters.NUM_CONSUMIDORES+"");
+        this.numItemsConsumidores.setText(LabParameters.NUM_ITEMS_CONSUMIDORES+"");
+        this.tiempoConsumoAleatorio.setValue(LabParameters.VALOR_TIEMPO_ALEATORIO_CONSUMIDORES);
+        this.tiempoConsumoFijo.setText(LabParameters.VALOR_FIJO_TIEMPO_CONSUMIDORES+"");
+        this.consumoAleatorio.setSelected(LabParameters.TIEMPO_ALEATORIO_CONSUMIDORES);
     }
 
     private void addContentToPane(){

@@ -10,12 +10,13 @@ public class TJTLVista extends JFrame implements ComponentListener, ActionListen
 
     private ResultsViewer resultsViewer;
 
-
+    private TJTLController controller;
 
     private JLabel titleLabel;
 
 
     public TJTLVista(TJTLController controller) {
+        this.controller = controller;
         titleLabel = new JLabel("ThreadLab 🔬");
         //because of the font
         titleLabel.setFont(new Font("SansSerif", Font.BOLD, 36));
@@ -73,6 +74,10 @@ public class TJTLVista extends JFrame implements ComponentListener, ActionListen
         String str = e.getActionCommand();
         switch (str) {
             case "Play/Pause":
+                break;
+            case "Reset":
+                this.controller.resetConfig();
+                this.generalConfiguration.updatePanelInfo();
                 break;
             default:
                 System.err.println("Acción NO tratada: " + e);

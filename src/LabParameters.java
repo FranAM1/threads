@@ -13,4 +13,8 @@ public class LabParameters {
     public static int VALOR_TIEMPO_ALEATORIO_CONSUMIDORES;
     public static int VALOR_FIJO_TIEMPO_CONSUMIDORES;
     public static boolean TIEMPO_ALEATORIO_CONSUMIDORES;
+
+    public static Product PRODUCT;
+
+
 }

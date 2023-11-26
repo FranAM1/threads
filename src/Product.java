@@ -3,5 +3,45 @@ public class Product extends ProtectedCounter{
     private int producedQuantity;
     private int consumedQuantity;
 
+    public Product(String description, int producedQuantity, int consumedQuantity) {
+        this.description = description;
+        this.producedQuantity = producedQuantity;
+        this.consumedQuantity = consumedQuantity;
+    }
 
+    public void produce(){
+
+    }
+
+    public void consume(){
+
+    }
+
+    public int getStock(){
+        return 0;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getProducedQuantity() {
+        return producedQuantity;
+    }
+
+    public void setProducedQuantity(int producedQuantity) {
+        this.producedQuantity = producedQuantity;
+    }
+
+    public int getConsumedQuantity() {
+        return consumedQuantity;
+    }
+
+    public void setConsumedQuantity(int consumedQuantity) {
+        this.consumedQuantity = consumedQuantity;
+    }
 }

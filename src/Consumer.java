@@ -9,20 +9,33 @@ public class Consumer implements Runnable {
 
     public void run() {
         for (int i = 0; i < 100; i++){
-//            try {
-//                int sleepTime = 0;
-//                if (this.model.getController().isTiempoConsumirAleatorio()){
-//                    Random rand = new Random();
-//
-//                    sleepTime = rand.nextInt(this.model.getController().getTiempoConsumir() == 0? 1 : this.model.getController().getTiempoConsumir());
-//                }else{
-//                    sleepTime = this.model.getController().getTiempoConsumir();
-//                }
-//
-//                Thread.sleep(sleepTime);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
+
+            if(LabParameters.PROTECCION_RC) {
+
+            } else {
+
+            }
+
+            if(LabParameters.TIEMPO_ALEATORIO_CONSUMIDORES) {
+                try {
+                    Thread.sleep(LabParameters.VALOR_TIEMPO_ALEATORIO_CONSUMIDORES);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    Thread.sleep(LabParameters.VALOR_FIJO_TIEMPO_CONSUMIDORES);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if(LabParameters.PROTECCION_RC) {
+
+            } else {
+
+            }
+
         }
     }
 
