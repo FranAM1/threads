@@ -10,6 +10,8 @@ public class Consumer implements Runnable {
     }
 
     public void run() {
+        long iniTimeRun = System.currentTimeMillis();
+
         if (LabParameters.PROTECCION_RC) {
             LabResults.CANTIDAD_HILOS_CONSUMIDORES_INI.inc_syncronized();
         } else {
@@ -47,6 +49,8 @@ public class Consumer implements Runnable {
             LabResults.CANTIDAD_HILOS_CONSUMIDORES_INI.dec();
         }
 
+        long endTimeRun = System.currentTimeMillis();
+        LabResults.MS_PROCESAR_THREADS_CONSUMIDORES += (endTimeRun - iniTimeRun);
     }
 
     public int getConsumedQuantity() {

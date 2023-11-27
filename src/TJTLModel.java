@@ -4,26 +4,47 @@ public class TJTLModel {
 
     private TJTLController controller;
 
+    ArrayList<Thread> threads;
+
     public TJTLModel(TJTLController controller){
+        this.threads = new ArrayList<>();
         this.controller = controller;
         resetConfigParameters();
         resetConfigResults();
     }
 
     public void play(){
-        ArrayList<Thread> threads = new ArrayList<>();
+
 
         for (int i = 0; i < LabParameters.NUM_PRODUCTORES; i++){
             Producer producer = new Producer(0);
+
+            long iniTimeThread = System.currentTimeMillis();
             Thread thread = new Thread(producer);
+            long endTimeThread = System.currentTimeMillis();
+            LabResults.MS_CREAR_THREADS += (endTimeThread - iniTimeThread);
+
+            long iniTimeStart = System.currentTimeMillis();
             thread.start();
+            long endTimeStart = System.currentTimeMillis();
+            LabResults.MS_INICIALIZAR_THREADS += (endTimeStart - iniTimeStart);
+
             threads.add(thread);
         }
 
         for (int i = 0; i < LabParameters.NUM_CONSUMIDORES; i++){
             Consumer consumer = new Consumer(0);
+
+            long iniTimeThread = System.currentTimeMillis();
             Thread thread = new Thread(consumer);
+            long endTimeThread = System.currentTimeMillis();
+            LabResults.MS_CREAR_THREADS += (endTimeThread - iniTimeThread);
+
+            long iniTimeStart = System.currentTimeMillis();
             thread.start();
+            long endTimeStart = System.currentTimeMillis();
+            LabResults.MS_INICIALIZAR_THREADS += (endTimeStart - iniTimeStart);
+
             threads.add(thread);
         }
     }
@@ -52,8 +73,8 @@ public class TJTLModel {
     public void resetConfigResults(){
         LabResults.MS_CREAR_THREADS = 0;
         LabResults.MS_INICIALIZAR_THREADS = 0;
-        LabResults.MS_INICIALIZAR_THREADS_PRODUCTORES = 0;
-        LabResults.MS_INICIALIZAR_THREADS_CONSUMIDORES = 0;
+        LabResults.MS_PROCESAR_THREADS_PRODUCTORES = 0;
+        LabResults.MS_PROCESAR_THREADS_CONSUMIDORES = 0;
 
         LabResults.CANTIDAD_ITEMS_PRODUCIDOS = new ProtectedCounter();
         LabResults.CANTIDAD_HILOS_PRODUCTORES_INI = new ProtectedCounter();

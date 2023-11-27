@@ -1,7 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
 public class ResultsViewer extends JPanel implements Runnable{
@@ -72,8 +71,8 @@ public class ResultsViewer extends JPanel implements Runnable{
     public void updateTableInfo(){
         this.tablaMilisegundos.setValueAt(LabResults.MS_CREAR_THREADS, 0, 1);
         this.tablaMilisegundos.setValueAt(LabResults.MS_INICIALIZAR_THREADS, 1, 1);
-        this.tablaMilisegundos.setValueAt(LabResults.MS_INICIALIZAR_THREADS_PRODUCTORES, 2, 1);
-        this.tablaMilisegundos.setValueAt(LabResults.MS_INICIALIZAR_THREADS_CONSUMIDORES, 3, 1);
+        this.tablaMilisegundos.setValueAt(LabResults.MS_PROCESAR_THREADS_PRODUCTORES, 2, 1);
+        this.tablaMilisegundos.setValueAt(LabResults.MS_PROCESAR_THREADS_CONSUMIDORES, 3, 1);
 
         this.tablaCantidad.setValueAt(LabResults.CANTIDAD_ITEMS_PRODUCIDOS.getValue(), 0, 1);
         this.tablaCantidad.setValueAt(LabResults.CANTIDAD_ITEMS_CONSUMIDOS.getValue(), 1, 1);

@@ -10,6 +10,8 @@ public class Producer implements Runnable{
     }
 
     public void run() {
+        long iniTimeRun = System.currentTimeMillis();
+
         if (LabParameters.PROTECCION_RC){
             LabResults.CANTIDAD_HILOS_PRODUCTORES_INI.inc_syncronized();
         }else{
@@ -46,6 +48,10 @@ public class Producer implements Runnable{
             LabResults.CANTIDAD_HILOS_PRODUCTORES_FIN.inc();
             LabResults.CANTIDAD_HILOS_PRODUCTORES_INI.dec();
         }
+
+        long endTimeRun = System.currentTimeMillis();
+
+        LabResults.MS_PROCESAR_THREADS_PRODUCTORES += (endTimeRun - iniTimeRun);
     }
 
     public int getProducedQuantity() {
