@@ -12,9 +12,21 @@ public class ResultsViewer extends JPanel implements Runnable{
 
     private JScrollPane scrollPaneCantidad;
 
+    private JTextField currentValue;
+
     public ResultsViewer(){
         this.setLayout(new GridBagLayout());
         this.setBackground(Color.darkGray);
+
+        this.currentValue = new JTextField("0");
+        this.currentValue.setEditable(false);
+        this.currentValue.setHorizontalAlignment(JTextField.CENTER);
+        this.currentValue.setFont(new Font("Arial", Font.BOLD, 24));
+        this.currentValue.setBackground(Color.black);
+        this.currentValue.setForeground(Color.white);
+        this.currentValue.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.white, 2),
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
         Object[][] dataMilisegundos = {
                 {"Crear objectos Thread", 0},
@@ -80,6 +92,8 @@ public class ResultsViewer extends JPanel implements Runnable{
         this.tablaCantidad.setValueAt(LabResults.CANTIDAD_HILOS_PRODUCTORES_FIN.getValue(), 3, 1);
         this.tablaCantidad.setValueAt(LabResults.CANTIDAD_HILOS_CONSUMIDORES_INI.getValue(), 4, 1);
         this.tablaCantidad.setValueAt(LabResults.CANTIDAD_HILOS_CONSUMIDORES_FIN.getValue(), 5, 1);
+
+        this.currentValue.setText(LabResults.PRODUCT.getValue()+"");
     }
 
     private void addComponentsToPane(){
@@ -143,4 +157,43 @@ public class ResultsViewer extends JPanel implements Runnable{
         table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
     }
 
+    public JTable getTablaMilisegundos() {
+        return tablaMilisegundos;
+    }
+
+    public void setTablaMilisegundos(JTable tablaMilisegundos) {
+        this.tablaMilisegundos = tablaMilisegundos;
+    }
+
+    public JScrollPane getScrollPaneMilisegundos() {
+        return scrollPaneMilisegundos;
+    }
+
+    public void setScrollPaneMilisegundos(JScrollPane scrollPaneMilisegundos) {
+        this.scrollPaneMilisegundos = scrollPaneMilisegundos;
+    }
+
+    public JTable getTablaCantidad() {
+        return tablaCantidad;
+    }
+
+    public void setTablaCantidad(JTable tablaCantidad) {
+        this.tablaCantidad = tablaCantidad;
+    }
+
+    public JScrollPane getScrollPaneCantidad() {
+        return scrollPaneCantidad;
+    }
+
+    public void setScrollPaneCantidad(JScrollPane scrollPaneCantidad) {
+        this.scrollPaneCantidad = scrollPaneCantidad;
+    }
+
+    public JTextField getCurrentValue() {
+        return currentValue;
+    }
+
+    public void setCurrentValue(JTextField currentValue) {
+        this.currentValue = currentValue;
+    }
 }

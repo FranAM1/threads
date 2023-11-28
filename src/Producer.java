@@ -21,8 +21,10 @@ public class Producer implements Runnable{
         for (int i = 0; i < LabParameters.NUM_ITEMS_PRODUCTORES; i++){
             if (LabParameters.PROTECCION_RC){
                 LabResults.CANTIDAD_ITEMS_PRODUCIDOS.inc_syncronized();
+                LabResults.PRODUCT.inc_syncronized();
             }else{
                 LabResults.CANTIDAD_ITEMS_PRODUCIDOS.inc();
+                LabResults.PRODUCT.inc();
             }
 
             if (LabParameters.TIEMPO_ALEATORIO_PRODUCTORES){

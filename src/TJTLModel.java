@@ -83,6 +83,8 @@ public class TJTLModel {
         LabResults.CANTIDAD_ITEMS_CONSUMIDOS = new ProtectedCounter();
         LabResults.CANTIDAD_HILOS_CONSUMIDORES_INI = new ProtectedCounter();
         LabResults.CANTIDAD_HILOS_CONSUMIDORES_FIN = new ProtectedCounter();
+
+        LabResults.PRODUCT = new Product("Prueba");
     }
 
     public TJTLController getController() {

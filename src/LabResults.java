@@ -11,4 +11,6 @@ public class LabResults {
     public static ProtectedCounter CANTIDAD_ITEMS_CONSUMIDOS;
     public static ProtectedCounter CANTIDAD_HILOS_CONSUMIDORES_INI;
     public static ProtectedCounter CANTIDAD_HILOS_CONSUMIDORES_FIN;
+
+    public static Product PRODUCT;
 }
