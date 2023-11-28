@@ -4,16 +4,33 @@ public class Product extends ProtectedCounter{
     private int consumedQuantity;
 
     public Product(String description) {
+        super();
         this.description = description;
         this.producedQuantity = 0;
         this.consumedQuantity = 0;
     }
 
     public void produce(){
+        inc();
+
+        producedQuantity++;
+    }
+
+    public synchronized void produce_syncronized(){
+        inc_syncronized();
+
         producedQuantity++;
     }
 
     public void consume(){
+        dec();
+
+        consumedQuantity++;
+    }
+
+    public synchronized void consume_syncronized(){
+        dec_syncronized();
+
         consumedQuantity++;
     }
 

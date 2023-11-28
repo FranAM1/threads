@@ -19,12 +19,10 @@ public class Consumer implements Runnable {
         }
 
         for (int i = 0; i < 100; i++){
-            if(LabParameters.PROTECCION_RC) {
-                LabResults.CANTIDAD_ITEMS_CONSUMIDOS.inc_syncronized();
-                LabResults.PRODUCT.dec_syncronized();
+            if (LabParameters.PROTECCION_RC) {
+                LabResults.PRODUCT.consume_syncronized();
             } else {
-                LabResults.CANTIDAD_ITEMS_CONSUMIDOS.inc();
-                LabResults.PRODUCT.dec();
+                LabResults.PRODUCT.consume();
             }
 
             if(LabParameters.TIEMPO_ALEATORIO_CONSUMIDORES) {

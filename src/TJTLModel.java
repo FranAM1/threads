@@ -54,7 +54,7 @@ public class TJTLModel {
     }
 
     public void resetConfigParameters(){
-        LabParameters.PROTECCION_RC = false;
+        LabParameters.PROTECCION_RC = true;
         LabParameters.PREVENIR_STOCK_NEGATIVO = false;
 
         LabParameters.NUM_PRODUCTORES = 400;
@@ -76,11 +76,9 @@ public class TJTLModel {
         LabResults.MS_PROCESAR_THREADS_PRODUCTORES = 0;
         LabResults.MS_PROCESAR_THREADS_CONSUMIDORES = 0;
 
-        LabResults.CANTIDAD_ITEMS_PRODUCIDOS = new ProtectedCounter();
         LabResults.CANTIDAD_HILOS_PRODUCTORES_INI = new ProtectedCounter();
         LabResults.CANTIDAD_HILOS_PRODUCTORES_FIN = new ProtectedCounter();
 
-        LabResults.CANTIDAD_ITEMS_CONSUMIDOS = new ProtectedCounter();
         LabResults.CANTIDAD_HILOS_CONSUMIDORES_INI = new ProtectedCounter();
         LabResults.CANTIDAD_HILOS_CONSUMIDORES_FIN = new ProtectedCounter();
 

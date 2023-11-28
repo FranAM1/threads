@@ -86,8 +86,8 @@ public class ResultsViewer extends JPanel implements Runnable{
         this.tablaMilisegundos.setValueAt(LabResults.MS_PROCESAR_THREADS_PRODUCTORES, 2, 1);
         this.tablaMilisegundos.setValueAt(LabResults.MS_PROCESAR_THREADS_CONSUMIDORES, 3, 1);
 
-        this.tablaCantidad.setValueAt(LabResults.CANTIDAD_ITEMS_PRODUCIDOS.getValue(), 0, 1);
-        this.tablaCantidad.setValueAt(LabResults.CANTIDAD_ITEMS_CONSUMIDOS.getValue(), 1, 1);
+        this.tablaCantidad.setValueAt(LabResults.PRODUCT.getProducedQuantity(), 0, 1);
+        this.tablaCantidad.setValueAt(LabResults.PRODUCT.getConsumedQuantity(), 1, 1);
         this.tablaCantidad.setValueAt(LabResults.CANTIDAD_HILOS_PRODUCTORES_INI.getValue(), 2, 1);
         this.tablaCantidad.setValueAt(LabResults.CANTIDAD_HILOS_PRODUCTORES_FIN.getValue(), 3, 1);
         this.tablaCantidad.setValueAt(LabResults.CANTIDAD_HILOS_CONSUMIDORES_INI.getValue(), 4, 1);
@@ -137,9 +137,9 @@ public class ResultsViewer extends JPanel implements Runnable{
 
     public void run() {
         while (true){
-            this.updateTableInfo();
             try {
                 Thread.sleep(100);
+                this.updateTableInfo();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
