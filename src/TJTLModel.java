@@ -14,7 +14,10 @@ public class TJTLModel {
     }
 
     public void play(){
-
+        if (threads.size() > 0){
+            notifyAll();
+            return;
+        }
 
         for (int i = 0; i < LabParameters.NUM_PRODUCTORES; i++){
             Producer producer = new Producer(0);
@@ -50,7 +53,13 @@ public class TJTLModel {
     }
 
     public void pause(){
-        System.out.println("Sistema parado");
+        for (Thread thread : threads){
+            try {
+                thread.wait();
+            } catch (Exception e) {
+                System.out.println("Error al parar los hilos");
+            }
+        }
     }
 
     public void resetConfigParameters(){

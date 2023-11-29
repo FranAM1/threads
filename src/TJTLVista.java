@@ -52,9 +52,6 @@ public class TJTLVista extends JFrame implements ComponentListener, ActionListen
         panel.add(this.controlPanel, c);
 
         c.gridy++;
-        panel.add(this.resultsViewer.getCurrentValue(), c);
-
-        c.gridy++;
         c.gridwidth = 1;
         panel.add(this.generalConfiguration, c);
 

@@ -92,8 +92,6 @@ public class ResultsViewer extends JPanel implements Runnable{
         this.tablaCantidad.setValueAt(LabResults.CANTIDAD_HILOS_PRODUCTORES_FIN.getValue(), 3, 1);
         this.tablaCantidad.setValueAt(LabResults.CANTIDAD_HILOS_CONSUMIDORES_INI.getValue(), 4, 1);
         this.tablaCantidad.setValueAt(LabResults.CANTIDAD_HILOS_CONSUMIDORES_FIN.getValue(), 5, 1);
-
-        this.currentValue.setText(LabResults.PRODUCT.getValue()+"");
     }
 
     private void addComponentsToPane(){
