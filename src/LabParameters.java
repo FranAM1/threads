@@ -1,6 +1,7 @@
 public class LabParameters {
     public static boolean PROTECCION_RC;
     public static boolean PREVENIR_STOCK_NEGATIVO;
+    public static boolean IS_PAUSED;
 
     public static int NUM_PRODUCTORES;
     public static int NUM_ITEMS_PRODUCTORES;

@@ -15,7 +15,6 @@ public class TJTLModel {
 
     public void play(){
         if (threads.size() > 0){
-            notifyAll();
             return;
         }
 
@@ -52,19 +51,10 @@ public class TJTLModel {
         }
     }
 
-    public void pause(){
-        for (Thread thread : threads){
-            try {
-                thread.wait();
-            } catch (Exception e) {
-                System.out.println("Error al parar los hilos");
-            }
-        }
-    }
-
     public void resetConfigParameters(){
         LabParameters.PROTECCION_RC = true;
         LabParameters.PREVENIR_STOCK_NEGATIVO = false;
+        LabParameters.IS_PAUSED = true;
 
         LabParameters.NUM_PRODUCTORES = 400;
         LabParameters.NUM_ITEMS_PRODUCTORES = 100;
@@ -77,6 +67,8 @@ public class TJTLModel {
         LabParameters.VALOR_TIEMPO_ALEATORIO_CONSUMIDORES = 100;
         LabParameters.VALOR_FIJO_TIEMPO_CONSUMIDORES = 100;
         LabParameters.TIEMPO_ALEATORIO_CONSUMIDORES = true;
+
+        threads = new ArrayList<>();
     }
 
     public void resetConfigResults(){

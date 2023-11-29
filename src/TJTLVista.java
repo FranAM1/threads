@@ -75,9 +75,10 @@ public class TJTLVista extends JFrame implements ComponentListener, ActionListen
         switch (str) {
             case "Play/Pause":
                 if (this.controlPanel.getPlayPauseButton().isSelected()){
+                    LabParameters.IS_PAUSED = false;
                     this.controller.play();
                 } else {
-                    this.controller.pause();
+                    LabParameters.IS_PAUSED = true;
                 }
                 break;
             case "Reset":
@@ -85,11 +86,11 @@ public class TJTLVista extends JFrame implements ComponentListener, ActionListen
                 this.generalConfiguration.updatePanelInfo();
                 this.resultsViewer.updateTableInfo();
                 this.controlPanel.updatePanel();
+                this.controlPanel.getPlayPauseButton().setSelected(false);
                 break;
             case "Apply":
                 this.generalConfiguration.updateDTO();
                 this.controlPanel.updateDTO();
-
                 this.showApplyMessage();
                 break;
             default:

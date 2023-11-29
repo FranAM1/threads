@@ -19,6 +19,13 @@ public class Consumer implements Runnable {
         }
 
         for (int i = 0; i < 100; i++){
+            while(LabParameters.IS_PAUSED){
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             if (LabParameters.PROTECCION_RC) {
                 LabResults.PRODUCT.consume_syncronized();
             } else {

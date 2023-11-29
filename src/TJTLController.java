@@ -21,10 +21,6 @@ public class TJTLController {
         thread.start();
     }
 
-    public void pause(){
-        modelo.pause();
-    }
-
     public void resetConfig(){
         modelo.resetConfigParameters();
         modelo.resetConfigResults();

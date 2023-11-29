@@ -18,6 +18,14 @@ public class Producer implements Runnable{
         }
 
         for (int i = 0; i < LabParameters.NUM_ITEMS_PRODUCTORES; i++){
+            while(LabParameters.IS_PAUSED){
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
             if(LabParameters.PROTECCION_RC){
                 LabResults.PRODUCT.produce_syncronized();
             }else{
